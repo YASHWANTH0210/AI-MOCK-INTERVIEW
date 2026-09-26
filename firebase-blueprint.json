@@ -1,0 +1,94 @@
+{
+  "entities": {
+    "UserProfile": {
+      "title": "UserProfile",
+      "description": "User profile with academic credentials, target track, and placement metrics",
+      "type": "object",
+      "properties": {
+        "uid": { "type": "string" },
+        "displayName": { "type": "string" },
+        "email": { "type": "string" },
+        "photoURL": { "type": "string" },
+        "college": { "type": "string" },
+        "batch": { "type": "string" },
+        "targetTrack": { "type": "string" },
+        "readinessScore": { "type": "number" },
+        "streakCount": { "type": "number" },
+        "lastActiveDate": { "type": "string" },
+        "createdAt": { "type": "string" },
+        "updatedAt": { "type": "string" }
+      },
+      "required": ["uid", "displayName", "email"]
+    },
+    "InterviewSession": {
+      "title": "InterviewSession",
+      "description": "Completed or recorded live AI mock interview session",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "userId": { "type": "string" },
+        "track": { "type": "string" },
+        "company": { "type": "string" },
+        "durationMinutes": { "type": "number" },
+        "overallScore": { "type": "number" },
+        "technicalScore": { "type": "number" },
+        "communicationScore": { "type": "number" },
+        "problemSolved": { "type": "string" },
+        "transcriptSummary": { "type": "string" },
+        "barRaiserVerdict": { "type": "string" },
+        "createdAt": { "type": "string" }
+      },
+      "required": ["id", "userId", "track", "overallScore", "createdAt"]
+    },
+    "CodeSubmission": {
+      "title": "CodeSubmission",
+      "description": "Candidate code IDE submission against algorithmic test harness",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "userId": { "type": "string" },
+        "problemTitle": { "type": "string" },
+        "language": { "type": "string" },
+        "code": { "type": "string" },
+        "status": { "type": "string" },
+        "runtimeMs": { "type": "number" },
+        "memoryMb": { "type": "number" },
+        "timeComplexity": { "type": "string" },
+        "spaceComplexity": { "type": "string" },
+        "createdAt": { "type": "string" }
+      },
+      "required": ["id", "userId", "problemTitle", "language", "status", "createdAt"]
+    },
+    "DailyPracticeLog": {
+      "title": "DailyPracticeLog",
+      "description": "Daily streak and consistency task record",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "userId": { "type": "string" },
+        "dateStr": { "type": "string" },
+        "streakNumber": { "type": "number" },
+        "createdAt": { "type": "string" }
+      },
+      "required": ["id", "userId", "dateStr", "streakNumber", "createdAt"]
+    }
+  },
+  "firestore": {
+    "/users/{userId}": {
+      "schema": "UserProfile",
+      "description": "Stores individual student profile documents keyed by Auth UID"
+    },
+    "/users/{userId}/sessions/{sessionId}": {
+      "schema": "InterviewSession",
+      "description": "Subcollection of interview sessions for the student"
+    },
+    "/users/{userId}/submissions/{submissionId}": {
+      "schema": "CodeSubmission",
+      "description": "Subcollection of coding test submissions for the student"
+    },
+    "/users/{userId}/practiceLogs/{logId}": {
+      "schema": "DailyPracticeLog",
+      "description": "Subcollection of daily check-ins for the student"
+    }
+  }
+}

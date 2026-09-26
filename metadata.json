@@ -1,0 +1,6 @@
+{
+  "name": "MockPulse AI - BTech Placement Suite",
+  "description": "Engineering interview simulator calibrated for BTech campus placements with real-time 3D AI interviewers, live coding IDE, and skill diagnostics.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
